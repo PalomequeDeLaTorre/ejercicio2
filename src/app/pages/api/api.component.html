@@ -1,0 +1,154 @@
+<body>
+    <div class="table-container" style="text-align: center;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Diámetro (km)</th>
+                    <th>Velocidad (km/h)</th>
+                    <th>Distancia (km)</th>
+                    <th>Fecha de acercamiento</th>
+                    <th>Peligroso</th>
+                    <th>Más información</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (asteroides of data; track asteroides.id) {
+                <tr>
+                    <td>{{ asteroides.name }}</td>
+                    <td>{{ asteroides.estimated_diameter.kilometers.estimated_diameter_min }} - {{ asteroides.estimated_diameter.kilometers.estimated_diameter_max }}</td>
+                    <td>{{ asteroides.close_approach_data[0].relative_velocity.kilometers_per_hour }}</td>
+                    <td>{{ asteroides.close_approach_data[0].miss_distance.kilometers }}</td>
+                    <td>{{ asteroides.close_approach_data[0].close_approach_date_full }}</td>
+                    <td>{{ asteroides.is_potentially_hazardous_asteroid ? 'Sí' : 'No' }}</td>
+                    <td><a href="{{ asteroides.nasa_jpl_url }}" target="_blank" class="boton-cuadrado">Ver</a></td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+
+<style>
+    /* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #ffffff;
+    color: white;
+    margin: 20px;
+    text-align: center;
+}
+
+.table-container {
+    width: 90%;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.884);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 36, 125, 1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(0, 36, 125, 1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #fc3d21;
+}
+
+th {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+td {
+    color: rgb(255, 255, 255);
+    font-size: 1rem;
+}
+
+tr:hover {
+    background-color: #fc3d21;
+}
+
+/* Botón mejorado para "Más información" y "Ver" */
+td a.button {
+    display: inline-block;
+    padding: 10px 18px;
+    background: #ffcc00;
+    color: #0b0d17;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 6px rgba(255, 204, 0, 0.4);
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+
+td a.button:hover {
+    background: #fc3d21;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px #fc3d21;
+}
+
+td a.button:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 6px #fc3d21;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .table-container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    th, td {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
+
+.boton-cuadrado {
+  display: inline-block;
+  padding: 15px 40px;
+  background-color: rgba(0, 36, 125, 1);
+  color: white;
+  text-decoration: none;
+  border-radius: 0;
+  text-align: center;
+  font-size: 18px;
+  text-transform: uppercase;
+  box-shadow: 0 4px 10px #fc3d21;
+  transition: all 0.3s ease;
+}
+
+.boton-cuadrado:hover {
+  background-color: rgba(0, 36, 125, 1);
+  box-shadow: 0 0 5px 2px rgb(255, 255, 255);
+  transform: scale(1.1);
+  letter-spacing: 1.5px;
+}
+
+.boton-cuadrado:active {
+  transform: scale(1);
+  box-shadow: 0 0 10px rgba(0, 36, 125, 1);
+}
+
+.boton-cuadrado:focus {
+  outline: none;
+  box-shadow: 0 0 20px 5px rgba(0, 36, 125, 1);
+}
+
+
+</style>
